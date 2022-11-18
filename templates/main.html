@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="messages" style="background-color:#ccc">
+  {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+      {{ message }}
+    </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<form method="post", name="test" class="mt-5">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <input type="submit" value="Message">
+</form>
+
+{% for each in templates %}
+    <div class="mt-3 d-flex box">
+        <div class="box-element">
+            <h2>{{ each.pk }}</h2>
+        </div>
+        <div class="box-element">
+            <img src="../{{ each.image.url }}" class="card-img-top modal-photo" alt="..." width="150px" height="250px">
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
